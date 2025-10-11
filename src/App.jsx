@@ -22,8 +22,8 @@ import ideasActiveIcon from './assets/images/my-ideas-active.png';
 
 const App = () => {
   const [feedbacks, setFeedbacks] = useState([
-    { id: 1, title: "title text", text: "subject text", category: "organization", rating: 0 },
-    { id: 2, title: "title text", text: "another test text", category: "performance", rating: 0 },
+    { id: 1, title: "title text", text: "subject text", category: "organization"},
+    { id: 2, title: "title text", text: "another test text", category: "performance"},
     
   ]);
 

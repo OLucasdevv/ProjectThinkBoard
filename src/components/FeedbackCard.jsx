@@ -5,34 +5,59 @@ import downvoteIcon from '../assets/images/arrowDown.png';
 import downvoteIconActive from '../assets/images/arrowDown-active.png';
 
 
-const FeedbackCard = ({ title, category, votes }) => {
-  const [voteCount, setVoteCount] = useState(votes);
+const FeedbackCard = ({ title, category}) => {
+  const [voteCount, setVoteCount] = useState(null);
 
   function handleUpvote() {
-    setVoteCount(prev => prev + 1);
+    if (activeVote !== 'upvote') {
+      setVoteCount(prev => (prev === null ? 1 : prev + 1));
+      setActiveVote ('upvote');
+    }
+    
   }
 
   function handleDownvote() {
-    setVoteCount(prev => prev - 1);
+    if (activeVote !== 'downvote') {
+    setVoteCount (prev => {
+      if (prev === null || prev === 1) return null;
+      return prev - 1;
+    });
+    setActiveVote('downvote')
   }
-
+  }
+  const [activeVote, setActiveVote] = useState(null);
   const votesOptions = [
-    {id: "up", icon: {upvoteIcon}, activeIcon: {upvoteIconActive}},
-    {id: "down", icon: {downvoteIcon}, activeIcon: {downvoteIconActive}}
+    { id: "upvote", icon: upvoteIcon, activeIcon: upvoteIconActive, action: handleUpvote },
+    { id: "downvote", icon: downvoteIcon, activeIcon: downvoteIconActive, action: handleDownvote },
   ]
 
 
   return (
     <div className="cards">
       <h3>{title}</h3>
-      <span>{category}</span>
-      <p>{voteCount} votos</p>
-      <button className = "upvoteButton" onClick={handleUpvote}>
-        <img src={upvoteIcon} alt="upvote" />
-      </button>
-      <button className = "downvoteButton" onClick = {handleDownvote}>
-        <img src={downvoteIcon} alt="downvote" />
-      </button>
+      <span>{category}</span>  
+      <div className="votingPlace">
+        {votesOptions.map((vote) => (
+          <button 
+            key={vote.id}
+            className={vote.id}
+            onClick={() => {
+              setActiveVote(vote.id);
+              vote.action();
+             
+
+            }}
+          >
+            <img
+              src={activeVote === vote.id ? vote.activeIcon : vote.icon}
+              alt={vote.id}
+            />
+            {vote.id === 'upvote' ?  voteCount : ''}
+            
+          </button>
+        ))}
+
+      </div>
     </div>
   );
 };

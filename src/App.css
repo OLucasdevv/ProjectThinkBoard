@@ -6,8 +6,14 @@
 }
 
 html, body, #root {
-  height: 100%;
-  font-family: 'Inter', Arial, sans-serif; /* fonte mais suave */
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  background: rgb(36, 35, 35); /* fundo escuro padrão */
+  font-family: 'Inter', Arial, sans-serif;
+  box-sizing: border-box;
+  overflow-x: hidden; /* evita scroll lateral */
 }
 
 /* Layout principal */
@@ -28,7 +34,7 @@ html, body, #root {
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
+  margin-top: 0px;
   gap: 10px;
   border-right: 1.5px solid rgba(255, 255, 255, 0.2);
   overflow: hidden;
@@ -96,7 +102,9 @@ html, body, #root {
   flex: 1;
   display: flex;
   flex-direction: column;
-  min-height: 0;
+  min-height: 100%;
+  width: 100%;
+ 
 }
 
 /* Navbar */
@@ -132,7 +140,6 @@ html, body, #root {
   border: 1px solid #333;
   border-radius: 16px;
   padding: 16px;
-  width: 320px; /* controla o tamanho do card */
   display: flex;
   flex-direction: column;
   color: white;
@@ -140,6 +147,11 @@ html, body, #root {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   margin-top: 10px;
+
+  width: fit-content;   /* largura mínima necessária para o conteúdo */
+  min-width: 320px;     /* largura mínima do card */
+  max-width: 100%;     /* não passa disso */
+  overflow-wrap: break-word;
 }
 
 .cards:hover {
@@ -151,11 +163,18 @@ html, body, #root {
   color: #fff;
   font-size: 1.1rem;
   margin-bottom: 4px;
+  word-break: break-word; /* caso título seja muito longo */
+}
+
+.cards p {
+  color: #aaa;
+  font-size: 0.9rem;
 }
 
 .cards span {
   color: #aaa;
   font-size: 0.9rem;
+  word-break: break-word; /* caso texto seja muito longo */
 }
 
 /* área de votação */
@@ -204,12 +223,7 @@ html, body, #root {
 
 
 /* Separador */
-.separator {
-  border-bottom: 1.5px solid rgba(255, 255, 255, 0.2);
-  margin: 10px 10px;
-  width: 255px;
-  margin-left: -20px;
-}
+
 
 .votingPlace {
   background-color: #1e1e1e; /* fundo do botão */
@@ -220,6 +234,136 @@ html, body, #root {
   display: inline-flex;
   transition: 0.2s;    
 
+}
+
+.submittingButton {
+  background-color: #1e1e1e;
+  border: 2px solid #444;
+  border-radius: 50px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* alinhado à esquerda já */
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: width 0.35s ease, background-color 0.2s ease; /* remove scale do botão */
+  margin-left: auto;
+  padding-left: 8.5px;
+}
+
+/* Ícone dentro do botão */
+.submittingButton img {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: transform 0.35s ease; /* só anima o deslocamento do ícone */
+  margin-right: 8px; /* espaço para o texto */
+}
+
+/* Texto escondido inicialmente */
+.submittingButton .tooltip-text {
+  color: #fff;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  position: absolute;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%) translateX(-10px);
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.35s ease;
+}
+
+/* Hover: botão expande, texto aparece */
+.submittingButton:hover {
+  width: 165px;
+  background-color: #252525;
+}
+
+.submittingButton:hover .tooltip-text {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Hover-out: botão volta, texto é cortado pelo overflow */
+.submittingButton:not(:hover) .tooltip-text {
+  opacity: 0;
+  transform: translateY(-50%) translateX(20px);
+}
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;           /* tira do fluxo, não quebra layout */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #1e1e1e; /* mantém o padrão ThinkBoard */
+  padding: 2rem;
+  border-radius: 16px;
+  width: 440px;              /* largura padrão do card */
+  max-width: 90%;            /* responsivo para telas pequenas */
+  max-height: 80%;           /* evita que seja maior que a tela */
+            /* scroll se conteúdo crescer */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Form dentro do modal */
+.submittingPlace {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  
+  
+}
+
+.submittingPlace input,
+.submittingPlace textarea,
+.submittingPlace select {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background-color: #252525;
+  color: #fff;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+}
+
+.submittingPlace button {
+  padding: 8px 16px;  
+  border: none;
+  border-radius: 8px;
+  background-color: #444;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.submittingPlace button:hover {
+  background-color: #555;
+  transform: scale(1.02);
+  
+}
+.submittingPlace img {
+ width: 20px;
+  height: 20px;
 }
 
 

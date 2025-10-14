@@ -11,7 +11,8 @@ const FeedbackList = ({feedbacks}) => {
             {feedbacks.map((feedback) => (
                 <FeedbackCard  
                     key={feedback.id}
-                    title={feedback.text}
+                    title={feedback.title}
+                    message= {feedback.message}
                     category={feedback.category}
                     votes={feedback.rating}   
 

@@ -1,0 +1,37 @@
+
+{
+    "Cards": {
+        "categories": {
+            "organization": "Organization",
+            "bug": "Report a bug or issue",
+            "idea": "New Idea",
+            "design": "Design or Interface",
+            "feature": "New Feature",
+            "feedback": "General Feedback"
+        }
+    },
+    "SortPlace": {
+        "recentButton": "Most Recent",
+        "categoriesButton": "Categories"
+    },
+    "Menu": {
+        "home": "Feedback Page",
+        "categories": "Categories",
+        "ideas": "My Ideas",
+        "aboutUs": "About ThinkBoard",
+        "addIdea": "I have an Idea!"
+    },
+    "Home": {
+        "title": "Feedback Page",
+        "subtitle": "Share ideas, vote for the best suggestions, and collaborate with your team"
+    },
+    "AboutUs": {
+        "title": "About ThinkBoard"
+    },
+    "Categories": {
+        "title": "Categories"
+    },
+    "Ideas": {
+        "title": "My Ideas"
+    }
+}

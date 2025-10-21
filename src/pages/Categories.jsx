@@ -1,8 +1,10 @@
+import { useTranslation } from 'react-i18next';
 
 const Categories = () => {
+  const { t, i18n } = useTranslation();
   return (
     <div>
-      <h2>Categorias</h2>
+      <h2>{t('Categories.title')}</h2>
     </div>
   );
 };

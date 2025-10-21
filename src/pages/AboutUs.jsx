@@ -1,7 +1,10 @@
+import { useTranslation } from 'react-i18next';
+
 const AboutUs = () => {
+  const { t, i18n } = useTranslation();
   return (
     <div>
-      <h2>Sobre o ThinkBoard</h2>
+      <h2>{t('AboutUs.title')}</h2>
     </div>
   );
 };

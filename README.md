@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-# ProjectThinkBoard
-ThinkBoard is an interactive idea board where users can post suggestions, vote, and collaborate on improvements.
-=======
 🧠 ThinkBoard
 
-ThinkBoard is a feedback and idea-sharing platform designed to help teams or communities collect, organize, and discuss improvement ideas in an intuitive way.  
+ThinkBoard is my first project and it is a feedback and idea-sharing platform designed to help teams or communities collect, organize, and discuss improvement ideas in an intuitive way.  
 It allows users to submit their thoughts, categorize them, and vote on what matters most — all in a clean, minimal interface.
 
 ---
@@ -46,9 +42,6 @@ src/
 ├── App.jsx # Core layout (navbar, sidebar, main content)
 └── main.jsx # React root file
 
-yaml
-Copiar código
-
 ---
 
 ## 🧭 Navigation Layout
@@ -87,4 +80,3 @@ If you like this project, consider giving it a ⭐ on GitHub!
 
 ---
 
->>>>>>> 96daceb (Initial commit)
